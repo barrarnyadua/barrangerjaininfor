@@ -51,9 +51,10 @@ nav ul li a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for better contrast */
     padding: 20px;
     border-radius: 10px;
+    text-align: center; /* Center text */
 }
 
 .highlights {
