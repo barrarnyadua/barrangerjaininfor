@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Sejarah Belgium</title>
+    <style>
+        /* Menambahkan gaya untuk menghindari tumpang tindih */
+        .hero {
+            position: relative;
+            padding-top: 100px; /* Memberikan ruang untuk header */
+        }
+        .hero img {
+            width: 100%;
+            height: auto;
+        }
+        .hero-text {
+            position: absolute;
+            top: 20px; /* Menempatkan teks di atas gambar */
+            left: 20px;
+            color: white; /* Warna teks agar kontras dengan gambar */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,28 +35,38 @@
             </ul>
         </nav>
     </header>
+    
     <main>
         <section class="hero">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Bruges_Belfry.jpg/1280px-Bruges_Belfry.jpg" alt="Bruges Belfry">
             <div class="hero-text">
-                <h2>History of Belgium</h2>
-                <p>Belgium has a rich history that dates back to the Roman Empire. It has been influenced by various cultures and has played a significant role in European history.</p>
+                <h2>Sejarah Belgia</h2>
+                <p>Belgia memiliki sejarah yang kaya yang dimulai sejak Kekaisaran Romawi. Negara ini telah dipengaruhi oleh berbagai budaya dan memainkan peran penting dalam sejarah Eropa.</p>
             </div>
         </section>
+        
         <section class="highlights">
-            <h2>Key Historical Events</h2>
+            <h2>Peristiwa Sejarah Utama</h2>
             <ul>
-                <li>Roman conquest and settlement</li>
-                <li>Formation of the Burgundian Netherlands</li>
-                <li>Independence from Spain in 1830</li>
-                <li>World War I and II impacts</li>
-                <li>Establishment of the European Union headquarters</li>
+                <li>Penaklukan dan pemukiman Romawi</li>
+                <li>Pembentukan Belanda Burgundia</li>
+                <li>Independensi dari Spanyol pada tahun 1830</li>
+                <li>Dampak Perang Dunia I dan II</li>
+                <li>Pendirian markas besar Uni Eropa</li>
             </ul>
         </section>
+        
+        <section class="additional-info">
+            <h2>Informasi Tambahan tentang Sejarah Belgia</h2>
+            <p>Belgia dikenal sebagai negara yang multibahasa, dengan tiga bahasa resmi: Belanda, Prancis, dan Jerman. Sejarahnya dipenuhi dengan konflik antara komunitas berbahasa Belanda dan Prancis, yang sering kali mempengaruhi politik dan budaya negara ini.</p>
+            <p>Setelah meraih kemerdekaan, Belgia menjadi salah satu pendiri Uni Eropa dan NATO, menjadikannya pusat diplomasi internasional.</p>
+        </section>
     </main>
+    
     <footer>
         <p>&copy; 2023 Belgium Introduction</p>
     </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
