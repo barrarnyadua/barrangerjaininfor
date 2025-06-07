@@ -1,29 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Wisata Belgium</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wisata Belgia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Same as above styles from budaya.html */
+    /* You can copy the same CSS here or link to a shared CSS file */
+  </style>
 </head>
-<body> <!-- Fixed the missing closing bracket here -->
-    <header>
-        <h1>Wisata Belgium</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="sejarah.html">Sejarah</a></li>
-                <li><a href="budaya.html">Budaya</a></li>
-                <li><a href="wisata.html">Wisata</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2>Tourism in Belgium</h2>
-        <p>Belgium offers a variety of attractions, from historical sites like the Atomium and Grand Place to beautiful countryside and vibrant cities like Brussels, Bruges, and Antwerp.</p>
-    </main>
-    <footer>
-        <p>&copy; 2023 Belgium Introduction</p>
-    </footer>
-    <script src="script.js"></script>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Belgium</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sejarah.html">Sejarah</a></li>
+        <li><a href="budaya.html">Budaya</a></li>
+        <li><a href="wisata.html">Wisata</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Destinasi Wisata Belgia</h1>
+      <p>Kota-kota indah seperti Brussels, Bruges, Antwerpen, dan Ghent menawarkan pengalaman wisata yang tak terlupakan.</p>
+    </div>
+  </section>
+
+  <!-- Wisata Highlights -->
+  <section class="section">
+    <h2>Kota-Kota Terkenal</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>🏙️ Brussels</h3>
+        <p>Ibu kota Belgia dan markas Uni Eropa serta NATO.</p>
+      </div>
+      <div class="card">
+        <h3>🏰 Bruges</h3>
+        <p>Kota kanal yang sering disebut Venice of the North.</p>
+      </div>
+      <div class="card">
+        <h3>🌆 Antwerpen</h3>
+        <p>Pusat mode dan permata di Eropa, terkenal dengan pelabuhannya.</p>
+      </div>
+      <div class="card">
+        <h3>🏯 Ghent</h3>
+        <p>Kota bergaya Gothic dengan kastil dan sungai yang indah.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Quote Generator -->
+  <section class="interactive-section">
+    <button class="btn-primary" onclick="generateQuote()">Generate Fakta Menarik</button>
+    <div id="quote-display"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2024 Belgium Travel Guide | Wisata Page
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function generateQuote() {
+      const quotes = [
+        "Brussels adalah rumah bagi Grand Place yang sangat indah.",
+        "Bruges memiliki lebih dari 100 gereja dan kuil bersejarah.",
+        "Antwerpen adalah pusat perdagangan berlian dunia.",
+        "Ghent dikenal dengan biara-biara tua dan lukisan Jan van Eyck.",
+        "Belgia punya pantai Laut Utara yang indah di pesisir utara."
+      ];
+      const quoteDisplay = document.getElementById("quote-display");
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteDisplay.innerHTML = `<em>"${quotes[randomIndex]}"</em>`;
+    }
+  </script>
+
 </body>
+</html>
