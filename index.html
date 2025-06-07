@@ -263,29 +263,11 @@
 
   <!-- JavaScript -->
   <script>
-    function scrollToSection(id) {
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-
-    function generateQuote() {
-      const quotes = [
-        "Belgium is where chocolate dreams come true.",
-        "Every street tells a story in Belgium.",
-        "From waffles to waterways — discover it all.",
-        "A small country with a big soul.",
-        "In Belgium, even beer has character.",
-        "Experience the magic of European heritage.",
-        "Life is sweeter in Belgium.",
-        "Where cultures meet — and food speaks."
-      ];
-      const quoteDisplay = document.getElementById("quote-display");
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      quoteDisplay.textContent = `"${quotes[randomIndex]}"`;
-    }
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+<script>
+  AOS.init();
   </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
