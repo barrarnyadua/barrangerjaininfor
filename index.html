@@ -89,7 +89,7 @@
         <!-- Hero Section -->
         <section class="h-screen flex items-center justify-center px-4 md:px-12 lg:px-24">
             <div class="text-center max-w-3xl fade-in">
-                <h1 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Hello, I'm <span class="font-normal">Your Name</span></h1>
+                <h1 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Hello, I'm <span class="font-normal">Barra Indy Pratama</span></h1>
                 <div class="h-1 w-24 bg-gray-600 mx-auto mb-6"></div>
                 <p class="text-lg md:text-xl font-light mb-10 opacity-90 delay-1 fade-in">Creative professional specializing in modern web solutions</p>
                 <a href="#projects" class="border border-gray-600 px-8 py-3 text-sm tracking-wider hover:border-white hover:bg-gray-900 transition duration-300 delay-2 fade-in inline-block">VIEW MY WORK</a>
@@ -196,17 +196,163 @@
         
         <!-- Interactive 3D Section -->
         <section class="py-20 px-4 md:px-12 lg:px-24 bg-overlay">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-2xl md:text-3xl font-light tracking-wider mb-6">EXPERIMENTAL WORK</h2>
-                <p class="text-lg font-light mb-12 leading-relaxed opacity-90">This 3D interactive element demonstrates my capability with WebGL and creative coding. Scroll to explore its behavior.</p>
-                
-                <div id="threejs-container" class="w-full h-96 bg-black rounded-lg overflow-hidden border border-gray-800">
-                    <!-- Three.js canvas will be inserted here -->
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl md:text-3xl font-light tracking-wider mb-6 gradient-text">EXPERIMENTAL WORK</h2>
+            <p class="text-lg font-light mb-12 leading-relaxed opacity-90">
+                This 3D interactive element demonstrates my capability with WebGL and creative coding. 
+                Scroll to explore its behavior.
+            </p>
+            
+            <div id="threejs-container" class="w-full h-96 bg-black rounded-lg overflow-hidden border border-gray-800 relative">
+                <!-- Loading indicator -->
+                <div id="loading" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 transition-opacity duration-500">
+                    <div class="text-center">
+                        <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p class="text-blue-400">Loading 3D experience...</p>
+                    </div>
                 </div>
-                
-                <p class="mt-8 text-sm opacity-80 font-light max-w-lg mx-auto">Try moving your cursor around the element above or scrolling to see it respond in real-time. Built with Three.js and GLSL shaders.</p>
             </div>
-        </section>
+            
+            <div class="mt-6 flex justify-center space-x-4">
+                <button id="change-color" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors">
+                    Change Color
+                </button>
+                <button id="toggle-wireframe" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors">
+                    Toggle Wireframe
+                </button>
+                <button id="reset-view" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors">
+                    Reset View
+                </button>
+            </div>
+            
+            <p class="mt-8 text-sm opacity-80 font-light max-w-lg mx-auto">
+                Try moving your cursor around the element above or scrolling to see it respond in real-time. 
+                Built with Three.js and GLSL shaders.
+            </p>
+        </div>
+    </section>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Three.js setup
+            const container = document.getElementById('threejs-container');
+            const loadingElement = document.getElementById('loading');
+            
+            // Scene setup
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            
+            // Camera setup
+            const camera = new THREE.PerspectiveCamera(
+                75, 
+                container.clientWidth / container.clientHeight, 
+                0.1, 
+                1000
+            );
+            camera.position.z = 5;
+            
+            // Renderer setup
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+            
+            // Controls
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            
+            // Geometry
+            const geometry = new THREE.BoxGeometry(2, 2, 2);
+            
+            // Material
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x3b82f6,
+                metalness: 0.7,
+                roughness: 0.2,
+                wireframe: false
+            });
+            
+            // Mesh
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+            
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            const pointLight = new THREE.PointLight(0xec4899, 2, 10);
+            pointLight.position.set(2, 3, 4);
+            scene.add(pointLight);
+            
+            // Mouse interaction variables
+            const mouse = new THREE.Vector2();
+            const targetRotation = new THREE.Vector2();
+            const targetRotationSpeed = 0.02;
+            
+            // Handle mouse move
+            function onMouseMove(event) {
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                targetRotation.x = mouse.y * Math.PI * 0.25;
+                targetRotation.y = mouse.x * Math.PI * 0.25;
+            }
+            
+            // Handle window resize
+            function onWindowResize() {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+            
+            window.addEventListener('resize', onWindowResize);
+            container.addEventListener('mousemove', onMouseMove);
+            
+            // Button interactions
+            document.getElementById('change-color').addEventListener('click', () => {
+                material.color.setHSL(Math.random(), 0.7, 0.5);
+            });
+            
+            document.getElementById('toggle-wireframe').addEventListener('click', () => {
+                material.wireframe = !material.wireframe;
+            });
+            
+            document.getElementById('reset-view').addEventListener('click', () => {
+                controls.reset();
+                cube.rotation.set(0, 0, 0);
+                targetRotation.set(0, 0);
+            });
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Smooth rotation towards mouse position
+                cube.rotation.x += (targetRotation.x - cube.rotation.x) * targetRotationSpeed;
+                cube.rotation.y += (targetRotation.y - cube.rotation.y) * targetRotationSpeed;
+                
+                // Update controls
+                controls.update();
+                
+                // Render scene
+                renderer.render(scene, camera);
+                
+                // Hide loading after first frame
+                if (loadingElement.style.opacity !== '0') {
+                    loadingElement.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingElement.style.display = 'none';
+                    }, 500);
+                }
+            }
+            
+            animate();
+        });
+    </script>
         
         <!-- Contact Section -->
         <section id="contact" class="py-20 px-4 md:px-12 lg:px-24">
@@ -219,15 +365,15 @@
                         <ul class="space-y-4">
                             <li class="flex items-start">
                                 <span class="text-sm opacity-80 block w-24">Email</span>
-                                <span>your.email@example.com</span>
+                                <span>barra.indy.bi@gmail.com</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-sm opacity-80 block w-24">Phone</span>
-                                <span>+1 (555) 123-4567</span>
+                                <span>+62 85176900816</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-sm opacity-80 block w-24">Based in</span>
-                                <span>San Francisco, CA</span>
+                                <span>Bekasi, Jawa Barat</span>
                             </li>
                         </ul>
                     </div>
@@ -256,11 +402,11 @@
         <!-- Footer -->
         <footer class="py-12 px-4 md:px-12 lg:px-24 border-t border-gray-900">
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
-                <div class="text-sm opacity-70 mb-4 md:mb-0">&copy; 2023 Your Name. All rights reserved.</div>
+                <div class="text-sm opacity-70 mb-4 md:mb-0">&copy; 2025 Barra. All rights reserved.</div>
                 <div class="flex space-x-6">
                     <a href="#" class="hover:opacity-100 opacity-70 transition duration-300">Twitter</a>
                     <a href="#" class="hover:opacity-100 opacity-70 transition duration-300">LinkedIn</a>
-                    <a href="#" class="hover:opacity-100 opacity-70 transition duration-300">GitHub</a>
+                    <a href="github.com/barrarnyadua" class="hover:opacity-100 opacity-70 transition duration-300">GitHub</a>
                     <a href="#" class="hover:opacity-100 opacity-70 transition duration-300">Dribbble</a>
                 </div>
             </div>
