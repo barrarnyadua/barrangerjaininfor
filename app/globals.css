@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50 text-gray-900;
+  /* Example of a global style override or addition */
+}
+
+/* You can add more global styles or component layer customizations here */
